@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './App.css'
+import Message from './Message'
 
 class App extends Component {
   input = ''
@@ -8,44 +8,28 @@ class App extends Component {
     super(props)
     this.state = {
       title: 'input form',
-      message: 'type your name'
+      message: 'type your name',
+      max: 10
     }
-    this.doChange = this.doChange.bind(this)
-    this.doSubmit = this.doSubmit.bind(this)
+    this.doCheck = this.doCheck.bind(this)
   }
 
-  doChange(event) {
-    this.input = event.target.value
-  }
-
-  doSubmit(event) {
-    this.setState({
-      title: 'send form',
-      message: 'Hello, ' + this.input + '!'
-    })
-    event.preventDefault()
+  doCheck(event) {
+    window.alert(event.target.value +
+      "は長すぎます。 (最大" + this.state.max + "文字)")
   }
 
   render() {
-    return <div>
-      <h1 className="bg-primary text-white display-4">React</h1>
-      <div className="container">
-        <h4>{this.state.title}</h4>
-        <p className="card h5 p-3">{this.state.message}</p>
-        <div className="alert alert-primary mt-3">
-          <form onSubmit={this.doSubmit}>
-            <div className="form-group">
-              <label>Message:</label>
-              <input type="text" className="form-control"
-                onChange={this.doChange}
-                required pattern="[A-Za-z _,.]+" />
-            </div>
-            <input type="submit" className="btn btn-primary"
-              value="Click" />
-          </form>
+    console.log(this.state)
+    return (
+      <div>
+        <h1 className="bg-primary text-white display-4">React</h1>
+        <div className="container">
+          <h4>{this.state.title}</h4>
+          <Message maxlength={this.state.max} onCheck={this.doCheck} />
         </div>
       </div>
-    </div>
+    )
   }
 }
 
