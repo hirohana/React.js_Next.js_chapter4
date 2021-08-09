@@ -1,5 +1,10 @@
-// import 文を使って sub.js ファイルを読み込む。
-import { hello } from "./sub";
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App'
 
-// sub.jsに定義されたJavaScriptを実行する。
-hello();
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+)
