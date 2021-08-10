@@ -1,12 +1,18 @@
-import useCounter from "./useCounter"
+import useCalc from "./useCalc"
+import { total } from './function'
 
 const AlertMessage = (props) => {
-  const [counter, plus] = useCounter()
+  const [msg, setCalc] = useCalc(0, total)
+
+  const onChange = (e) => {
+    setCalc(e.target.value)
+  }
 
   return (
-    <div className="alert alert-primary h5 text-center">
-      <h4>count: {counter} .</h4>
-      <button onClick={plus} className="btn btn-primary">count</button>
+    <div className="alert alert-primary h5 text-primary">
+      <h5>{msg}</h5>
+      <input type="number" onChange={onChange}
+        min="0" max="10000" className="form-control" />
     </div>
   )
 }
